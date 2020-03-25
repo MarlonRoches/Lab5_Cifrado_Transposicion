@@ -15,9 +15,14 @@ namespace Desarollo_Cifrados
 
             var CifradoPath = "C:\\Users\\roche\\Desktop\\Tea.txt";
             var KeyCesar = "Quesio";
-            Cifrados.Instance.CifrarCesar(KeyCesar, CifradoPath);
+           // Cifrados.Instance.CifrarCesar(KeyCesar, CifradoPath);
             var DesCifradoPath = "C:\\Users\\roche\\Desktop\\Ces_Tea.txt";
-            Cifrados.Instance.DecifrarCesar(KeyCesar, DesCifradoPath);
+           // Cifrados.Instance.DecifrarCesar(KeyCesar, DesCifradoPath);
+
+
+            Cifrados.Instance.RailCodificar(5, CifradoPath);
+            Cifrados.Instance.RailDecodificar(5, CifradoPath);
+
         }
     }
 }
