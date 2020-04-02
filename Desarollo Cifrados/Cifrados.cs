@@ -20,10 +20,187 @@ namespace Desarollo_Cifrados
             }
         }
         string GlobalPath = string.Empty;
-     
+        #region VariablesGlobales
+        string original_path = string.Empty;
+        string index_p10 = "2416390875";
+        //string Index_PermutacionSeleccionada = "39860127";
+        string index_p8 = "52637498";
+        string index_p4 = "0321";
+        string index_Expand = "13023201";
+        string index_inicial = "15203746";
+        string index_IPinverse = "30246175";
+        string index_leftshift1 = "12340";
+        string[,] S0 = new string[4, 4];
+        string[,] S1 = new string[4, 4];
+        #endregion
+
+        #region Ruta
+
+        public void CifrarRuta(int m, int n, bool tipo, bool Horario, bool Horizontal, string _Path)
+        {
+            GlobalPath = _Path;
+            var File = new FileStream(GlobalPath, FileMode.Open);
+            var reader = new StreamReader(File);
+            var raw_text = reader.ReadToEnd();
+            var salida = string.Empty;
+            if (raw_text.Length> (m*n))
+            {
+                // no cabe
+            }
+            else
+            {
+                //si cabe
+             salida =Horizontal_a_Vertical(raw_text, m, n);
+            }
+
+             salida =Vertical_a_Horizontal(salida, m, n);
+
+        }
+
+        public void DecifrarRuta(int m, int n, bool tipo, bool Horario, bool Horizontal, string _Path)
+        {
+            GlobalPath = _Path;
+
+        }
+        void Direccional(string texto, bool Horizontal, bool accion)
+        {
+
+            if (accion)
+            {//lectura
+                if (Horizontal)
+                {
+
+                }
+                else
+                {
+
+                }
+            }
+            else
+            {//escritura
+                if (Horizontal)
+                {
+
+                }
+                else
+                {
+
+                }
+            }
+        }
+        public string Horizontal_a_Vertical(string Texto,int m,int n)
+        {
+            var i = 0;
+            var matriz = new string[n, m];
+
+            for (int y = 0; y < n; y++)
+            {
+                for (int x = 0; x < m; x++)
+                {
+                    if (i<Texto.Length)
+                    {
+
+                        matriz[y, x] = Texto[i].ToString();
+                        i++;
+                    }
+                    else
+                    {
+                        matriz[y, x] = "_";
+                    }
+                    
+                }
+            }
+            var salida = string.Empty;
+            for (int x = 0; x < m; x++)
+            {
+                for (int y = 0; y < n; y++)
+                {
+
+                        salida += matriz[y, x];
+                        i++;
+                    
+                }
+            }
+            return salida;
+        }
+        public string Vertical_a_Horizontal(string Texto, int m, int n)
+        {
+
+            var i = 0;
+            var matriz = new string[n, m];
+
+            
+            for (int x = 0; x < m; x++)
+            {
+                for (int y = 0; y < n; y++)
+                {
+                    if (i < Texto.Length)
+                    {
+
+                        matriz[y, x] = Texto[i].ToString();
+                        i++;
+                    }
+                    else
+                    {
+                        matriz[y, x] = "_";
+                    }
+
+                }
+            }
+            var salida = string.Empty;
+            for (int y = 0; y < n; y++)
+            {
+                for (int x = 0; x < m; x++)
+                {
+
+                    salida += matriz[y, x];
+                    i++;
+
+                }
+            }
+            return salida;
+        }
+        void Espiral(string texto, bool horario,bool accion)
+        {
+
+            if (accion)
+            {//lectura
+                if (horario)
+                {
+
+                }
+                else
+                {
+
+                }
+            }
+            else
+            {//escritura
+                if (horario)
+                {
+
+                }
+                else
+                {
+
+                }
+            }
+        }
+        public string LecturaHoraria(string Texto, int m, int n)
+        {
+
+            return "";
+        }
+        public string LecturaAntiHoraria(string Texto, int m, int n)
+        {
+
+            return "";
+        }
+
+        #endregion
         #region Rail
 
-        public void RailCodificar(int grado,string _path)
+        public void RailCodificar(int grado,string _path, string NonmbreArchivo)
         {
             GlobalPath = _path;
             var decoded = new FileStream(GlobalPath, FileMode.Open);
@@ -74,7 +251,7 @@ namespace Desarollo_Cifrados
             }
 
             //Escritura
-            var nombrearchivo = $"{Path.GetDirectoryName(decoded.Name)}\\{Path.GetFileNameWithoutExtension(decoded.Name)}_ZigZag.txt";
+            var nombrearchivo = $"{Path.GetDirectoryName(decoded.Name)}\\{NonmbreArchivo}_ZigZag.txt";
             var encoded = new FileStream(nombrearchivo, FileMode.OpenOrCreate); //archivo
             var writer = new BinaryWriter(encoded);
             var codedtext = "";
@@ -94,7 +271,7 @@ namespace Desarollo_Cifrados
 
             var monitor = 0;
         }
-        public void RailDecodificar(int grado, string _path)
+        public void RailDecodificar(int grado, string _path, string NonmbreArchivo)
         {
             GlobalPath = _path;
             var Original = new FileStream(GlobalPath, FileMode.Open);
@@ -134,7 +311,7 @@ namespace Desarollo_Cifrados
             uncipher = uncipher.Replace('$', ' ');
 
 
-            var nombrearchivo = $"{Path.GetDirectoryName(Original.Name)}\\{Path.GetFileNameWithoutExtension(Original.Name)}_ZZD.txt".Replace("_ZigZag", "");
+            var nombrearchivo = $"{Path.GetDirectoryName(Original.Name)}\\{NonmbreArchivo}_ZZD.txt".Replace("_ZigZag", "");
             var decoded = new FileStream(nombrearchivo, FileMode.OpenOrCreate); //archivo
             var writer = new BinaryWriter(decoded);
             var codedtext = "";
@@ -155,7 +332,7 @@ namespace Desarollo_Cifrados
         #endregion
         #region Cesar
 
-        public void CifrarCesar(string clave,string _path)//recibe el archivo a cifrar
+        public void CifrarCesar(string clave,string _path,string nombre)//recibe el archivo a cifrar
         {
             GlobalPath = _path;
             var Alfabeto = LlenarAlfabeto_Cifrado();
@@ -176,7 +353,7 @@ namespace Desarollo_Cifrados
             #region Variables De Acceso
             var Original = new FileStream(GlobalPath, FileMode.Open); //archivo
             var reader = new StreamReader(Original);
-            var nombrearchivo = $"{Path.GetDirectoryName(Original.Name)}\\Ces_{Path.GetFileNameWithoutExtension(Original.Name)}.txt";
+            var nombrearchivo = $"{Path.GetDirectoryName(Original.Name)}\\Ces_{nombre}.txt";
             var encoded = new FileStream(nombrearchivo, FileMode.OpenOrCreate); //archivo
             var writer = new BinaryWriter(encoded);
 
@@ -204,7 +381,7 @@ namespace Desarollo_Cifrados
             Original.Close();
             encoded.Close();
         }
-        public void DecifrarCesar(string codigo, string _path)
+        public void DecifrarCesar(string codigo, string _path, string nombre)
         {
             GlobalPath = _path;
 
@@ -225,7 +402,7 @@ namespace Desarollo_Cifrados
 
             var Cifrado = new FileStream(GlobalPath, FileMode.Open); //archivo
             var reader = new StreamReader(Cifrado);
-            var nombrearchivo = $"{Path.GetDirectoryName(Cifrado.Name)}\\{Path.GetFileNameWithoutExtension(Cifrado.Name)}_Des.txt".Replace("Ces_","");
+            var nombrearchivo = $"{Path.GetDirectoryName(Cifrado.Name)}\\{nombre}_Des.txt".Replace("Ces_","");
 
             var decoded = new FileStream(nombrearchivo, FileMode.OpenOrCreate); //archivo
             var writer = new BinaryWriter(decoded);
