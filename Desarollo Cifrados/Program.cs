@@ -21,7 +21,7 @@ namespace Desarollo_Cifrados
             //Cifrados.Instance.RailCodificar(5, CifradoPath,"Prueba");
             //Cifrados.Instance.RailDecodificar(5, CifradoPath, "Prueba");
 
-            Cifrados.Instance.CifrarRuta(10, 5, true, false,true, $"C:\\Users\\roche\\Desktop\\Lab 5 Marlon Roches.txt");
+            //Cifrados.Instance.CifrarRuta(10,"", $"C:\\Users\\roche\\Desktop\\Lab 5 Marlon Roches.txt");
 
 
         }

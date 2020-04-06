@@ -6,7 +6,7 @@ using System.Text;
 using System.Web;
 using System.Numerics;
 
-namespace Desarollo_Cifrados
+namespace Lab_5_Cifrado_Transposicion
 {
     public class Cifrados
     {
@@ -37,7 +37,7 @@ namespace Desarollo_Cifrados
         
         #region Ruta
 
-        public void CifrarRuta(int m, string tipo,string _Path,string nombre)
+        public void Ruta(int m, string tipo,string _Path,string nombre)
         {
             GlobalPath = _Path;
             var File = new FileStream(GlobalPath, FileMode.Open);
@@ -263,7 +263,7 @@ namespace Desarollo_Cifrados
 
 
         #endregion
-        public int Calcular_n(int m, string texto)
+         int Calcular_n(int m, string texto)
         {
             var n = 0;
             while ((n * m) < texto.Length)
@@ -273,7 +273,7 @@ namespace Desarollo_Cifrados
             return n;
         }
         #region Rail
-        public void RailCodificar(int grado,string _path, string NonmbreArchivo)
+        public void CifrarRail(int grado,string _path, string NonmbreArchivo)
         {
             GlobalPath = _path;
             var decoded = new FileStream(GlobalPath, FileMode.Open);
@@ -344,7 +344,7 @@ namespace Desarollo_Cifrados
 
             var monitor = 0;
         }
-        public void RailDecodificar(int grado, string _path, string NonmbreArchivo)
+        public void DecifrarRail(int grado, string _path, string NonmbreArchivo)
         {
             GlobalPath = _path;
             var Original = new FileStream(GlobalPath, FileMode.Open);
